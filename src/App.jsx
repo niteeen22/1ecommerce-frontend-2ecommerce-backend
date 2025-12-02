@@ -15,7 +15,9 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import MyOrders from "./pages/MyOrders";
-import Checkout from "./pages/Checkout"
+import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
 // Admin
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/Dashboard";
@@ -55,6 +57,9 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+
 
 
         {/* Admin Routes */}
