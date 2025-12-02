@@ -26,25 +26,57 @@ const ProductDetails = () => {
   };
 
   
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/api/products/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setP(data.product || data);
+  //       setUserRating(data.product.rating);
+  //     });
+  // }, [id]);
+
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setP(data.product || data);
-        setUserRating(data.product.rating);
-      });
-  }, [id]);
+  fetch(`http://localhost:5000/api/products/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const product = data.product || data;
+
+      console.log("FULL PRODUCT:", product);  
+
+      setP(product);
+      setUserRating(product.rating || 0);
+    })
+    .catch(err => console.log("Error:", err));
+}, [id]);
+
 
   if (!p) return <h2>Loading...</h2>;
 
   return (
     <div className="details-wrapper">
       <div className="details-left">
-        <img
+        {/* <img
           className="product-detail"
           src={p.images?.[0] || "/no-image.png"}
           alt={p.name}
-        />
+        /> */}
+        <img
+  className="product-detail"
+  src={`${p.images?.[0]}`}
+  alt={p.name}
+  onError={() => console.log("Image load error:", p.images?.[0])}
+/>
+
+{/* <img
+  className="product-detail"
+  src={
+    p.images?.[0]                // backend array of images
+    || "/no-image.png"
+  }
+  alt={p.name}
+/> */}
+
+
       </div>
 
       <div className="details-right">
