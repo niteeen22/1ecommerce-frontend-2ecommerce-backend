@@ -51,6 +51,10 @@ const Checkout = () => {
       <p>Total Amount: ₹{total}</p>
 
       <button onClick={placeOrder}>Confirm Order</button>
+      <button onClick={() => navigate("/payment", { state: { address } })} style={{margin:"10px"}}>
+  Proceed to Payment
+</button>
+
     </div>
   );
 };

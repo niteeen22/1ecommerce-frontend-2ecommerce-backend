@@ -43,7 +43,7 @@ const removeItem=(index)=>{
 
           <div>
             <h3>{i.name}</h3>
-            <p>₹{i.price}</p>
+            <p>${i.price}</p>
 
             <div className="qty-box">
               <button onClick={() => updateQty(idx, "dec")}>–</button>
