@@ -35,8 +35,9 @@ function App() {
 
   return (
     <Router>
+         <Toaster position="top-center" />
       <NavBar setToken={setToken} />
-          <Toaster position="top-center" reverseOrder={false} />
+          {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <Routes>
         {/* User Routes */}
         <Route path="/" element={<Navigate to="/home" />} />
