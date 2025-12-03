@@ -43,6 +43,9 @@ const NavBar = ({ setToken }) => {
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </Link>
         </li>
+        <li>
+              <Link to="/my-orders">Order</Link>
+            </li>
 
         {/* ---------- ADMIN SECTION ---------- */}
         {!adminLoggedIn ? (
@@ -57,6 +60,7 @@ const NavBar = ({ setToken }) => {
             <li>
               <button onClick={logoutAdmin}>Admin Logout</button>
             </li>
+            
           </>
         )}
 
