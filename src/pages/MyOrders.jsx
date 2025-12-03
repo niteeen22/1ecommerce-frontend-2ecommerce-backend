@@ -185,7 +185,7 @@ const MyOrders = () => {
               </span>
             </div>
 
-            {/* 🟢 ORDER & DELIVERY DATE */}
+            {/* ORDER & DELIVERY DATE */}
             <p style={{ margin: "5px 0" }}>
               <strong>Ordered On:</strong> {formatDate(order.createdAt)}
             </p>
