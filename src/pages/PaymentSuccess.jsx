@@ -34,9 +34,7 @@ const PaymentSuccess = () => {
       <h2>Payment Successful</h2>
       <p>Your order has been placed!</p>
 
-      <button onClick={() => navigate("/my-orders")}>
-        View My Orders
-      </button>
+      <button onClick={() => navigate("/my-orders")}>View My Orders</button>
     </div>
   );
 };

@@ -21,18 +21,17 @@ const EditOrder = () => {
     fetchOrder();
   }, [id]);
 
-const updateStatus = async () => {
-  const token = localStorage.getItem("adminToken");
+  const updateStatus = async () => {
+    const token = localStorage.getItem("adminToken");
 
-  await axios.put(
-    `http://localhost:5000/api/orders/update/${id}`,
-    { status },
-    { headers: { Authorization: "Bearer " + token } }
-  );
+    await axios.put(
+      `http://localhost:5000/api/orders/update/${id}`,
+      { status },
+      { headers: { Authorization: "Bearer " + token } }
+    );
 
-  navigate("/admin/orders");
-};
-
+    navigate("/admin/orders");
+  };
 
   return (
     <div style={{ padding: "20px" }}>
@@ -46,10 +45,10 @@ const updateStatus = async () => {
         <option>Cancelled</option>
       </select>
 
-      <br /><br />
+      <br />
+      <br />
 
-      <button onClick={updateStatus}>Update
-      </button>
+      <button onClick={updateStatus}>Update</button>
     </div>
   );
 };

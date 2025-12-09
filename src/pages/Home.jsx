@@ -29,14 +29,12 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const search = params.get("search") || "";
 
     applySearch(search);
   }, [location.search, products]);
-
 
   const applySearch = (term) => {
     if (!term.trim()) {
@@ -68,13 +66,17 @@ const Home = () => {
             ))
         ) : filtered.length ? (
           filtered.map((item) => (
-            <Link key={item._id} to={`/product/${item._id}`} className="product-card">
+            <Link
+              key={item._id}
+              to={`/product/${item._id}`}
+              className="product-card"
+            >
               <img
                 src={item.images?.[0] || item.image || "/no-image.png"}
                 alt={item.name}
               />
               <h3>{item.name}</h3>
-              <p>₹{item.price}</p>
+              <p>${item.price}</p>
             </Link>
           ))
         ) : (

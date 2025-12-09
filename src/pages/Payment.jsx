@@ -6,7 +6,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { cart, total } = useContext(CartContext);
-  const [paymentMethod, setPaymentMethod] = useState("upi"); 
+  const [paymentMethod, setPaymentMethod] = useState("upi");
 
   const handlePayment = () => {
     // Check if cart is empty
@@ -21,8 +21,8 @@ const Payment = () => {
     }
 
     if (paymentMethod === "gpay") {
-      alert("Scan the QR code to complete payment"); 
-      return; 
+      alert("Scan the QR code to complete payment");
+      return;
     }
 
     // Proceed to success page
@@ -76,7 +76,7 @@ const Payment = () => {
         <button
           className="pay-btn"
           onClick={handlePayment}
-          disabled={cart.length === 0} 
+          disabled={cart.length === 0}
         >
           {paymentMethod === "cod" ? `Pay $${total}` : "I have paid"}
         </button>

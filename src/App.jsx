@@ -35,9 +35,9 @@ function App() {
 
   return (
     <Router>
-         <Toaster position="top-center" />
+      <Toaster position="top-center" />
       <NavBar setToken={setToken} />
-          {/* <Toaster position="top-center" reverseOrder={false} /> */}
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <Routes>
         {/* User Routes */}
         <Route path="/" element={<Navigate to="/home" />} />
@@ -60,8 +60,6 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-
-
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
