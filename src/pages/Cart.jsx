@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 const Cart = () => {
   const { cart, updateCart } = useContext(CartContext);
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const updateQty = (index, type) => {
     const updated = [...cart];
 
@@ -14,24 +14,22 @@ const Cart = () => {
       updated[index].qty -= 1;
     }
 
-    updateCart(updated); 
+    updateCart(updated);
   };
 
   const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
-
-
   const goToCheckout = () => {
-  const token = localStorage.getItem("token");
-  if (!token) return navigate("/login");
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/login");
 
-  navigate("/checkout");
-};
+    navigate("/checkout");
+  };
 
-const removeItem=(index)=>{
-  const updated=cart.filter((_,i)=>i!==index);
-  updateCart(updated);
-}
+  const removeItem = (index) => {
+    const updated = cart.filter((_, i) => i !== index);
+    updateCart(updated);
+  };
 
   return (
     <div className="cart-container">
@@ -49,7 +47,7 @@ const removeItem=(index)=>{
               <button onClick={() => updateQty(idx, "dec")}>–</button>
               <span>{i.qty}</span>
               <button onClick={() => updateQty(idx, "inc")}>+</button>
-              <button onClick={()=>removeItem(idx)}>Remove</button>
+              <button onClick={() => removeItem(idx)}>Remove</button>
             </div>
           </div>
         </div>
@@ -57,14 +55,13 @@ const removeItem=(index)=>{
       {/* <button className="place-order-btn" onClick={placeOrder}>
   Place Order
 </button> */}
-<button onClick={goToCheckout} className="checkout-btn">
-  Place Order
-</button>
+      <button onClick={goToCheckout} className="checkout-btn">
+        Place Order
+      </button>
 
-      <h2>Total: ₹{total}</h2>
+      <h2>Total: ${total}</h2>
     </div>
   );
 };
 
 export default Cart;
-

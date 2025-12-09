@@ -23,10 +23,22 @@ const Signup = () => {
     <div className="Signup-page">
       <form onSubmit={handleSubmit}>
         <h2>Signup</h2>
-        <input placeholder="Name" onChange={(e) => setForm({ ...form, name: e.target.value })}/>
-        <input placeholder="Email" onChange={(e) => setForm({ ...form, email: e.target.value })}/>
-        <input type="password" placeholder="Password" onChange={(e) => setForm({ ...form, password: e.target.value })}/>
-        <button type="submit" className="Login-Signup">Signup</button>
+        <input
+          placeholder="Name"
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          placeholder="Email"
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        />
+        <button type="submit" className="Login-Signup">
+          Signup
+        </button>
         {error && <p>{error}</p>}
         <p onClick={() => navigate("/login")}>Already have an account?</p>
       </form>

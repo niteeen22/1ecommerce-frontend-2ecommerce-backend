@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Toaster} from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
 
 const EditUser = () => {
   const { id } = useParams();
@@ -24,11 +24,9 @@ const EditUser = () => {
     e.preventDefault();
     const token = localStorage.getItem("adminToken");
 
-    await axios.put(
-      `http://localhost:5000/api/admin/users/${id}`,
-      user,
-      { headers: { Authorization: "Bearer " + token } }
-    );
+    await axios.put(`http://localhost:5000/api/admin/users/${id}`, user, {
+      headers: { Authorization: "Bearer " + token },
+    });
 
     navigate("/admin/users");
   };
@@ -50,8 +48,9 @@ const EditUser = () => {
           onChange={(e) => setUser({ ...user, email: e.target.value })}
           placeholder="Email"
         />
-        <button type="submit">Update
-          <Toaster/>
+        <button type="submit">
+          Update
+          <Toaster />
         </button>
       </form>
     </div>

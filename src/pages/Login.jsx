@@ -12,39 +12,53 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       localStorage.setItem("token", data.token);
-      
-      toast.success("Login Successful "); 
+
+      toast.success("Login Successful");
       navigate("/");
     } catch (err) {
-      toast.error("Invalid credentials "); 
+      toast.error("Invalid credentials ");
     }
   };
 
   return (
     <div>
-      <h2>User Login</h2>
+      <h2 style={{ textAlign: "center", padding: "16px" }}>User Login</h2>
       <form onSubmit={submitHandler}>
         <input
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-        /><br/>
+        />
+        <br />
 
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-        /><br/>
+        />
+        <br />
 
-        <button type="submit" className="Login-Signup">Login</button>
-        <p onClick={()=>navigate('/forgot-password')} className="forgot-password">forget-password?</p>
-        <p onClick={()=>navigate('/signup')} className="Signup-form">If u  are not signup u please Signup first!</p>
+        <button type="submit" className="Login-Signup">
+          Login
+        </button>
+        <p
+          onClick={() => navigate("/forgot-password")}
+          className="forgot-password"
+        >
+          forget-password?
+        </p>
+        <p onClick={() => navigate("/signup")} className="Signup-form">
+          If u are not signup u please Signup first!
+        </p>
       </form>
     </div>
   );

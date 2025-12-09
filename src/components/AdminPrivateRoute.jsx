@@ -8,4 +8,3 @@ const AdminPrivateRoute = ({ children }) => {
 };
 
 export default AdminPrivateRoute;
-

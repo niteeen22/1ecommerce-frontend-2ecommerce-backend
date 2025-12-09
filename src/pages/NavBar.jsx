@@ -3,17 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { CartContext } from "../context/CartContext";
 
-
-
 const NavBar = ({ setToken }) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const { cart } = useContext(CartContext);
-const [searchTerm,setSearchTerm]=useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Total cart quantity count
   const cartCount = cart.reduce((total, item) => total + item.qty, 0);
-   
+
   const userLoggedIn = localStorage.getItem("token");
   const adminLoggedIn = localStorage.getItem("adminToken");
 
@@ -28,22 +26,26 @@ const [searchTerm,setSearchTerm]=useState('');
     navigate("/admin/login");
   };
 
-  const handleChange=(event)=>{
-    const value=event.target.value;
+  const handleChange = (event) => {
+    const value = event.target.value;
     setSearchTerm(value);
-    navigate(`home?search=${value}`)
-  }
+    navigate(`/home?search=${value}`);
+  };
 
   return (
     <nav className="navbar-container">
-      <div className="nav-brand"><h2>MyStore</h2></div>
+      <div className="nav-brand">
+        <h2>MyStore</h2>
+      </div>
 
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </div>
 
       <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
-        <li><Link to="/home">Home</Link></li>
+        <li>
+          <Link to="/home">Home</Link>
+        </li>
 
         <li className="cart-wrapper">
           <Link to="/cart" className="cart-icon">
@@ -52,20 +54,22 @@ const [searchTerm,setSearchTerm]=useState('');
           </Link>
         </li>
         <li>
-              <Link to="/my-orders">Order</Link>
-            </li>
-            <li>
-               <input type="text"
-            value={searchTerm} 
+          <Link to="/my-orders">Order</Link>
+        </li>
+        <li>
+          <input
+            type="text"
+            value={searchTerm}
             onChange={handleChange}
             placeholder="Search..."
-            style={{padding:"6px 2px",
-              border:"1px solid #ccc",
-              outline:"none",
-              borderRadius:"5px"
-            }}/>
-            </li>
-           
+            style={{
+              padding: "6px 2px",
+              border: "1px solid #ccc",
+              outline: "none",
+              borderRadius: "5px",
+            }}
+          />
+        </li>
 
         {/* ---------- ADMIN SECTION ---------- */}
         {!adminLoggedIn ? (
@@ -80,12 +84,15 @@ const [searchTerm,setSearchTerm]=useState('');
             <li>
               <button onClick={logoutAdmin}>Admin Logout</button>
             </li>
-            
           </>
         )}
 
         {/* ---------- USER SECTION ---------- */}
-        {!userLoggedIn && <li><Link to="/login">User Login</Link></li>}
+        {!userLoggedIn && (
+          <li>
+            <Link to="/login">User Login</Link>
+          </li>
+        )}
 
         {userLoggedIn && (
           <li>

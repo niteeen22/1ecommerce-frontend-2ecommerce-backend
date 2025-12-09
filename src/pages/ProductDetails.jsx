@@ -20,35 +20,24 @@ const ProductDetails = () => {
     });
 
     const data = await res.json();
-    setP(data.product); 
+    setP(data.product);
 
     alert("Thanks! Rating submitted.");
   };
 
-  
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/api/products/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setP(data.product || data);
-  //       setUserRating(data.product.rating);
-  //     });
-  // }, [id]);
-
   useEffect(() => {
-  fetch(`http://localhost:5000/api/products/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const product = data.product || data;
+    fetch(`http://localhost:5000/api/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const product = data.product || data;
 
-      console.log("FULL PRODUCT:", product);  
+        console.log("FULL PRODUCT:", product);
 
-      setP(product);
-      setUserRating(product.rating || 0);
-    })
-    .catch(err => console.log("Error:", err));
-}, [id]);
-
+        setP(product);
+        setUserRating(product.rating || 0);
+      })
+      .catch((err) => console.log("Error:", err));
+  }, [id]);
 
   if (!p) return <h2>Loading...</h2>;
 
@@ -61,13 +50,13 @@ const ProductDetails = () => {
           alt={p.name}
         /> */}
         <img
-  className="product-detail"
-  src={`${p.images?.[0]}`}
-  alt={p.name}
-  onError={() => console.log("Image load error:", p.images?.[0])}
-/>
+          className="product-detail"
+          src={`${p.images?.[0]}`}
+          alt={p.name}
+          onError={() => console.log("Image load error:", p.images?.[0])}
+        />
 
-{/* <img
+        {/* <img
   className="product-detail"
   src={
     p.images?.[0]                // backend array of images
@@ -75,8 +64,6 @@ const ProductDetails = () => {
   }
   alt={p.name}
 /> */}
-
-
       </div>
 
       <div className="details-right">
@@ -89,14 +76,8 @@ const ProductDetails = () => {
 
         <p>
           <strong>Rating: </strong>
-          <Rating
-            onClick={handleRating}
-            initialValue={userRating}
-            size={28}
-          />
-          <span style={{ marginLeft: "8px" }}>
-            ({p.rating?.toFixed(1)})  
-          </span>
+          <Rating onClick={handleRating} initialValue={userRating} size={28} />
+          <span style={{ marginLeft: "8px" }}>({p.rating?.toFixed(1)})</span>
         </p>
 
         <p>
