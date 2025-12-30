@@ -3,55 +3,31 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import API from '../utils/api';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-// const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = import.meta.env.VITE_API_URL;
+
   // FETCH PRODUCTS
   useEffect(() => {
-    
-// const fetchProducts = async () => {
-//   try {
-//     const res = await axios.get(`${API_URL}/products`);
-//     const list = res.data.products || res.data;
+    const fetchProducts = async () => {
+      try {
+        // const res = await axios.get("http://localhost:5000/api/products");
+           const res = await API.get("/api/products");
+            setProducts(res.data.products || res.data.data);
+        // const list = res.data.products || res.data;
 
-//     setProducts(list);
-//     setFiltered(list);
-//   } catch (err) {
-//     console.log(err);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
-    // const fetchProducts = async () => {
-    //   try {
-    //     const res = await axios.get("http://localhost:5000/api/products");
-    //     const list = res.data.products || res.data;
+        // setProducts(list);
+        // setFiltered(list);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    //     setProducts(list);
-    //     setFiltered(list);
-    //   } catch (err) {
-    //     console.log(err);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-const fetchProducts = async () => {
-  try {
-    const res = await axios.get(`${API_URL}/products`);
-    const list = res.data.products || res.data;
-    setProducts(list);
-    setFiltered(list);
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setLoading(false);
-  }
-};
     fetchProducts();
   }, []);
 
@@ -97,12 +73,10 @@ const fetchProducts = async () => {
               to={`/product/${item._id}`}
               className="product-card"
             >
-              {/* <img
+              <img
                 src={item.images?.[0] || item.image || "/no-image.png"}
                 alt={item.name}
-              /> */}
-              <img src={item.images?.[0] ? `${API_URL}${item.images[0]}` : "/no-image.png"} />
-
+              />
               <h3>{item.name}</h3>
               <p>${item.price}</p>
             </Link>
