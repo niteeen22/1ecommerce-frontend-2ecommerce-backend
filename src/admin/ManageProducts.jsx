@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import withLayout from "./WithLayout";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +10,32 @@ const ManageProducts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 9;
+
+  const handleExportCSV = async () => {
+    const token = localStorage.getItem("adminToken");
+    try {
+      const res = await fetch(
+        "http://localhost:5000/api/admin/export-products",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "products.csv";
+      a.click();
+    } catch (error) {
+      console.error(error);
+      alert("CSV File Download failed");
+    }
+  };
 
   const fetchProducts = async (page = 1, searchTerm = "") => {
     try {
@@ -58,7 +85,12 @@ const ManageProducts = () => {
   return (
     <div className="manage-products-container">
       <h1>Manage Products</h1>
-
+      <button
+        onClick={handleExportCSV}
+        style={{ margin: "4px", padding: "10px", textAlign: "center" }}
+      >
+        Export-Products
+      </button>
       <Link to="/admin/products/add" className="add-product-btn">
         Add Product
       </Link>
@@ -144,4 +176,4 @@ const ManageProducts = () => {
   );
 };
 
-export default ManageProducts;
+export default withLayout(ManageProducts);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import withLayout from "./WithLayout";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({ products: 0, users: 0, orders: 0 });
@@ -42,54 +43,33 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Admin Dashboard</h1>
-      {/* <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}> */}
+    <div className="dashboard-main">
+      <h1>AdminDashboard</h1>
       <div className="admin-Dashboard">
-        {/* <div className="admin-margin" style={{ background: "#f2f2f2", padding: "20px", borderRadius: "10px", flex: 1 }}> */}
-        <div
-          style={{
-            background: "#f2f2f2",
-            padding: "20px",
-            borderRadius: "10px",
-            flex: 1,
-            margin: "10px",
-          }}
-        >
+        <div className="dashboard-card">
           <h2>Total Products</h2>
-          <p style={{ fontSize: "24px" }}>{stats.products}</p>
-          <Link to="/admin/products">Manage Products</Link>
+          <p className="dashboard-number">{stats.products}</p>
+          <Link className="dashboard-mobile-link" to="/admin/products">
+            Manage Products
+          </Link>
         </div>
-        <div
-          style={{
-            background: "#f2f2f2",
-            padding: "20px",
-            borderRadius: "10px",
-            flex: 1,
-            margin: "10px",
-            margin: "10px",
-          }}
-        >
+        <div className="dashboard-card">
           <h2>Total Users</h2>
-          <p style={{ fontSize: "24px" }}>{stats.users}</p>
-          <Link to="/admin/users">Manage Users</Link>
+          <p className="dashboard-number">{stats.users}</p>
+          <Link className="dashboard-mobile-link" to="/admin/users">
+            Manage Users
+          </Link>
         </div>
-        <div
-          style={{
-            background: "#f2f2f2",
-            padding: "20px",
-            borderRadius: "10px",
-            flex: 1,
-            margin: "10px",
-          }}
-        >
+        <div className="dashboard-card">
           <h2>Total Orders</h2>
-          <p style={{ fontSize: "24px" }}>{stats.orders}</p>
-          <Link to="/admin/orders">View Orders</Link>
+          <p className="dashboard-number">{stats.orders}</p>
+          <Link className="dashboard-mobile-link" to="/admin/orders">
+            Manage Orders
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default withLayout(Dashboard);
