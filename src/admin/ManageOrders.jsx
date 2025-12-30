@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
+import withLayout from "./WithLayout";
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -10,6 +11,30 @@ const ManageOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 10;
+
+  const handleExportCSV = async () => {
+    const token = localStorage.getItem("adminToken");
+    try {
+      const res = await fetch(
+        "http://localhost:5000/api/admin/export-orders",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "orders.csv";
+      a.click();
+    } catch (error) {
+      console.error(error);
+      alert("CSV File  Download Failed");
+    }
+  };
 
   // Fetch orders from server
   const fetchOrders = async (page = 1, searchTerm = "") => {
@@ -65,9 +90,14 @@ const ManageOrders = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px",width:"71%",position:"relative",left:"20%" }}>
       <h1>Manage Orders</h1>
-
+      <button
+        onClick={handleExportCSV}
+        style={{ margin: "5px", padding: "8px" }}
+      >
+        Export Orders CSV
+      </button>
       <input
         type="text"
         placeholder="Search Orders by user or email..."
@@ -163,4 +193,4 @@ const ManageOrders = () => {
   );
 };
 
-export default ManageOrders;
+export default withLayout (ManageOrders);

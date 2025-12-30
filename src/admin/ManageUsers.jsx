@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import withLayout from "./WithLayout";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -174,4 +175,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default withLayout (ManageUsers);

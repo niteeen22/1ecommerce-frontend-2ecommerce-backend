@@ -15,8 +15,12 @@ const NavBar = ({ setToken }) => {
   const userLoggedIn = localStorage.getItem("token");
   const adminLoggedIn = localStorage.getItem("adminToken");
 
+  // Get USER NAME FORM LOCAL STORAGE
+  const userName = localStorage.getItem("userName");
+
   const logoutUser = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     setToken(null);
     navigate("/login");
   };
@@ -79,7 +83,7 @@ const NavBar = ({ setToken }) => {
         ) : (
           <>
             <li>
-              <Link to="/admin/dashboard">Admin Dashboard</Link>
+              <Link to="/admin/dashboard">Admin-Dashboard</Link>
             </li>
             <li>
               <button onClick={logoutAdmin}>Admin Logout</button>
@@ -95,9 +99,13 @@ const NavBar = ({ setToken }) => {
         )}
 
         {userLoggedIn && (
-          <li>
-            <button onClick={logoutUser}>Logout</button>
-          </li>
+          <>
+            {/* {User Name Show} */}
+            <li style={{ fontWeight: "bold", color: "#f6f6f6ff" }}>Welcome-{userName}</li>
+            <li>
+              <button onClick={logoutUser}>User Logout</button>
+            </li>
+          </>
         )}
       </ul>
     </nav>
