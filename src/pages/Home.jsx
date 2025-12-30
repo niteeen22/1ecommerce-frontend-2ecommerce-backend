@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import API from '../utils/api';
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -14,13 +14,11 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // const res = await axios.get("http://localhost:5000/api/products");
-           const res = await API.get("/api/products");
-            setProducts(res.data.products || res.data.data);
-        // const list = res.data.products || res.data;
+        const res = await axios.get("http://localhost:5000/api/products");
+        const list = res.data.products || res.data;
 
-        // setProducts(list);
-        // setFiltered(list);
+        setProducts(list);
+        setFiltered(list);
       } catch (err) {
         console.log(err);
       } finally {
