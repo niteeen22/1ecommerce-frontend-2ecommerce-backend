@@ -9,25 +9,77 @@ const Home = () => {
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-
+  // const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   // FETCH PRODUCTS
+  // useEffect(() => {
+    // const fetchProducts = async () => {
+    //   try {
+    //     const res = await axios.get("http://localhost:5000/api/products");
+    //     const list = res.data.products || res.data;
+
+    //     setProducts(list);
+    //     setFiltered(list);
+    //   } catch (err) {
+    //     console.log(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };const API_URL = import.meta.env.VITE_API_URL;
+
+// const fetchProducts = async () => {
+//   try {
+//     const res = await axios.get(`${API_URL}/products`);
+//     const list = res.data.products || res.data;
+//     setProducts(list);
+//     setFiltered(list);
+//   } catch (err) {
+//     console.log(err);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
+//     fetchProducts();
+//   }, []);
+
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const res = await axios.get(`${API_URL}/products`);
+  //       const list = Array.isArray(res.data.products) ? res.data.products : res.data;
+
+  //       setProducts(list);
+  //       setFiltered(list);
+  //     } catch (err) {
+  //       console.log("Error fetching products:", err);
+  //       setProducts([]);
+  //       setFiltered([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, [API_URL]);
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/products");
-        const list = res.data.products || res.data;
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/products`);
+      const list = Array.isArray(res.data.products) ? res.data.products : res.data;
+      setProducts(list);
+      setFiltered(list);
+    } catch (err) {
+      console.log("Error fetching products:", err);
+      setProducts([]);
+      setFiltered([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setProducts(list);
-        setFiltered(list);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  fetchProducts();
+}, [API_URL]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
